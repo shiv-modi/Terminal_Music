@@ -4,8 +4,16 @@ An open-source YouTube and YouTube Music client for the terminal. It is designed
 
 ## Install
 
+From PyPI, once published:
+
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install terminal-music
+```
+
+From this repository:
+
+```bash
+python -m pip install .
 ```
 
 Install [mpv](https://mpv.io/installation/) for playback. Without a player, the client prints the playable URL.
@@ -13,34 +21,34 @@ Install [mpv](https://mpv.io/installation/) for playback. Without a player, the 
 ## Commands
 
 ```bash
-python main.py search "lofi hip hop"
-python main.py music "A.R. Rahman"
-python main.py chart India
-python main.py play "Daft Punk Get Lucky"
-python main.py play "Daft Punk Get Lucky" --speed 1.1 --normalize
-python main.py local ~/Music/song.flac
-python main.py lyrics "Bohemian Rhapsody"
+terminal-music search "lofi hip hop"
+terminal-music music "A.R. Rahman"
+terminal-music chart India
+terminal-music play "Daft Punk Get Lucky"
+terminal-music play "Daft Punk Get Lucky" --speed 1.1 --normalize
+terminal-music local ~/Music/song.flac
+terminal-music lyrics "Bohemian Rhapsody"
 
-python main.py queue-add "ambient mix"
-python main.py queue
-python main.py next
+terminal-music queue-add "ambient mix"
+terminal-music queue
+terminal-music next
 
-python main.py like "favorite song"
-python main.py library
-python main.py history
-python main.py stats
+terminal-music like "favorite song"
+terminal-music library
+terminal-music history
+terminal-music stats
 
-python main.py playlist create workouts
-python main.py playlist add workouts "running mix"
-python main.py playlist show workouts
-python main.py subscribe "NPR Music"
-python main.py subscriptions
+terminal-music playlist create workouts
+terminal-music playlist add workouts "running mix"
+terminal-music playlist show workouts
+terminal-music subscribe "NPR Music"
+terminal-music subscriptions
 ```
 
 Start the full terminal client with:
 
 ```bash
-python main.py interactive
+terminal-music interactive
 ```
 
 Inside the shell, commands such as `search`, `music`, `play`, `queue`, `library`, `playlist`, `subscribe`, and `help` are available. Plain text is treated as a search query.
