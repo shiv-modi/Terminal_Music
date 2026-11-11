@@ -1,52 +1,83 @@
-# Terminal Music 🎶
+# Terminal Music
 
-![Python](https://img.shields.io/badge/Made%20with-Python-blue.svg)
-![Selenium](https://img.shields.io/badge/Selenium-Web%20Scraping-green.svg)
+An open-source YouTube and YouTube Music client for the terminal. It is designed like a modern CLI application: one-shot commands for scripts, an interactive `tm>` shell for daily use, and a local SQLite library for saved media, history, queues, playlists, and subscriptions.
 
-## 🎵 Excited to share my latest project: Terminal Music! 🎵
+## Install
 
-Ever wondered what songs are trending in different parts of the world? 🌍
+```bash
+python -m pip install -r requirements.txt
+```
 
-**Terminal Music** is a command-line tool that lets you explore the top 100 trending songs in over 60 countries, all from your terminal window. Discover new music and stay connected with global trends without leaving your terminal!
+Install [mpv](https://mpv.io/installation/) for playback. Without a player, the client prints the playable URL.
 
-## 🚀 How It Works:
-1. **Choose Your Country**: Pick a country from the provided list.
-2. **Explore the Trends**: View the top 100 trending songs in that region.
-3. **Play a Song**: Select a song from the list and start listening right away.
+## Commands
 
-## 🛠️ Technologies Used:
-- **Python**: The core programming language used to build the project.
-- **Selenium**: Web scraping tool used to fetch real-time music charts from YouTube Music.
+```bash
+python main.py search "lofi hip hop"
+python main.py music "A.R. Rahman"
+python main.py chart India
+python main.py play "Daft Punk Get Lucky"
+python main.py play "Daft Punk Get Lucky" --speed 1.1 --normalize
+python main.py local ~/Music/song.flac
+python main.py lyrics "Bohemian Rhapsody"
 
-## 📦 Installation
+python main.py queue-add "ambient mix"
+python main.py queue
+python main.py next
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/shiv-modi/Terminal_Music.git
-   cd terminal-music
-2. **Install the required Python packages:**
-   ```bash
-   pip install -r requirements.txt
-3. **Run the script:**
-   ```bash
-   python main.py
+python main.py like "favorite song"
+python main.py library
+python main.py history
+python main.py stats
 
-## 🌟 Features
+python main.py playlist create workouts
+python main.py playlist add workouts "running mix"
+python main.py playlist show workouts
+python main.py subscribe "NPR Music"
+python main.py subscriptions
+```
 
-- **Real-time Data**: Get the latest music trends from over 60 countries.
-- **Simple Interface**: Easy-to-use terminal-based navigation.
-- **Seamless Playback**: Enjoy music directly from your terminal.
+Start the full terminal client with:
 
-## 🎥 Demo
+```bash
+python main.py interactive
+```
 
-Check out this quick demo to see Terminal Music in action! [Watch the demo video](https://www.linkedin.com/posts/shivmodi_terminalmusic-musictrends-pythonproject-activity-7189260717051494400-CllL?utm_source=share&utm_medium=member_desktop)
+Inside the shell, commands such as `search`, `music`, `play`, `queue`, `library`, `playlist`, `subscribe`, and `help` are available. Plain text is treated as a search query.
 
-## 🙌 Contribution
+## ArchiveTune-inspired features
 
-Feel free to fork this project, submit issues, or suggest new features via pull requests. Contributions are always welcome!
+The CLI includes the practical terminal equivalents of ArchiveTune’s player experience:
 
-## 📝 License
+- Local audio files alongside YouTube playback
+- Background-capable playback through `mpv`
+- Speed, pitch, gapless playback, and loudness normalization controls
+- Lyrics lookup through LRCLIB
+- Local listening history and statistics
+- Saved library, playlists, queue, and subscriptions
+- A scriptable shell rather than a GUI-only workflow
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Account switching, cloud playlist synchronization, Spotify import, Last.fm/ListenBrainz scrobbling, Discord presence, and live translated lyrics require separate authenticated integrations and are intentionally not represented as working features yet.
 
+## Project structure
 
+```text
+main.py                 # executable entry point
+terminal_music/
+  cli.py                # commands and interactive shell
+  config.py             # XDG application paths
+  models.py             # media domain model
+  providers.py          # YouTube/YouTube Music provider
+  player.py             # mpv/ffplay playback adapter
+  lyrics.py             # lyrics provider
+  storage.py            # SQLite library, queue, and history
+  ui.py                 # terminal rendering
+```
+
+## Data and scope
+
+Local data is stored in `~/.local/share/terminal-music/library.db` (or `$XDG_DATA_HOME`). Public YouTube and YouTube Music search is provided by `yt-dlp`; playback is delegated to a local player. Local subscriptions and playlists are intentionally account-independent. Authenticated YouTube account sync can be added later without changing the CLI storage model.
+
+## License
+
+MIT
