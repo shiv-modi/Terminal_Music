@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "terminal-music"
+version = "3.0.0"
+description = "An open-source YouTube and YouTube Music client for the terminal"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Terminal Music contributors" }
+]
+dependencies = [
+    "yt-dlp>=2024.12.13",
+]
+keywords = ["youtube", "youtube-music", "cli", "music-player", "terminal"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Multimedia :: Sound/Audio",
+]
+
+[project.scripts]
+terminal-music = "terminal_music.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/shiv-modi/Terminal_Music"
+Repository = "https://github.com/shiv-modi/Terminal_Music"
+Issues = "https://github.com/shiv-modi/Terminal_Music/issues"
+
+[tool.setuptools.packages.find]
+include = ["terminal_music*"]
